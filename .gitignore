@@ -2,7 +2,7 @@
 __pycache__
 /TEMP
 *.pyd
-*.pt
+#*.pt
 *.pth
 *.exe
 *.bin
