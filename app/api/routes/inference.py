@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends
 from dotenv import load_dotenv
 #from database.voice import get_db
 from app.crud.model import get_model
+from app.core.clean import clean_html
 from app.core.download import download_model
 from app.core.polly import polly_voice
 from app.core.convert import mp3_to_wav
@@ -15,6 +16,7 @@ router = APIRouter()
 
 @router.post('/{user_id}')
 def inference(user_id: int, post: Post):
+    post.content = clean_html(post.content)
     model = get_model(user_id)
     model_path, index_path = download_model(model)
     mp3 = polly_voice(post)
